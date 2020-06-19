@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    rabbitmq:
+       image: siangyeh8818/rabbitmq-cluster:3.8.5-release-2
+       container_name: rabbitmq
+       hostname: rabbitmq1
+       network_mode: host
+       restart: always
+       extra_hosts:
+         - "rabbitmq1:192.168.0.10"
+         - "rabbitmq2:192.168.0.12"
+       env_file:
+         - ./.env
+       environment:
+         - PLATFORM_MODE=host
+       volumes:
+          - /etc/localtime:/etc/localtime
+          - /opt/rabbitmq:/var/lib/rabbitmq
